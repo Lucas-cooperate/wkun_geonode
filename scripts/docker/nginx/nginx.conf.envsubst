@@ -24,6 +24,9 @@ http {
     server {
         listen              80;
         server_name         $HTTP_HOST 127.0.0.1 geonode;
+        location /images/ {
+    			alias /etc/nginx/images/;
+		}
 
         include sites-enabled/*.conf;
     }

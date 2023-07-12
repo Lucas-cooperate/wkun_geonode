@@ -1040,7 +1040,7 @@ OGC_SERVER = {
         # Set to name of database in DATABASES dictionary to enable
         # 'datastore',
         "DATASTORE": os.getenv("DEFAULT_BACKEND_DATASTORE", ""),
-        "TIMEOUT": int(os.getenv("OGC_REQUEST_TIMEOUT", "60")),
+        "TIMEOUT": int(os.getenv("OGC_REQUEST_TIMEOUT", "600")),
         "MAX_RETRIES": int(os.getenv("OGC_REQUEST_MAX_RETRIES", "3")),
         "BACKOFF_FACTOR": float(os.getenv("OGC_REQUEST_BACKOFF_FACTOR", "0.3")),
         "POOL_MAXSIZE": int(os.getenv("OGC_REQUEST_POOL_MAXSIZE", "10")),
@@ -1718,7 +1718,7 @@ BROKER_HEARTBEAT = 0
 BROKER_TRANSPORT_OPTIONS = {
     "fanout_prefix": True,
     "fanout_patterns": True,
-    "socket_timeout": 60,
+    "socket_timeout": 600,
     "visibility_timeout": 86400,
 }
 
@@ -2220,7 +2220,7 @@ SUPPORTED_DATASET_FILE_TYPES = [
         "format": "vector",
         "ext": ["shp"],
         "requires": ["shp", "prj", "dbf", "shx"],
-        "optional": ["xml", "sld"],
+        "optional": ["cpg", "xml", "sld"],
     },
     {
         "id": "tiff",

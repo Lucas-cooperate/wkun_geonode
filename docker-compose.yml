@@ -29,6 +29,8 @@ services:
       context: ./
       dockerfile: Dockerfile
     container_name: django4${COMPOSE_PROJECT_NAME}
+    ports:
+      - "8000:8000"
     healthcheck:
       test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8001/"
       start_period: 60s
@@ -45,6 +47,8 @@ services:
     << : *default-common-django
     image: geonode/geonode:4.0
     container_name: celery4${COMPOSE_PROJECT_NAME}
+    ports:
+      - "8001:8000"
     depends_on:
       - django
     environment:
@@ -91,6 +95,8 @@ services:
   geoserver:
     image: geonode/geoserver:2.23.0
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
+    ports:
+      - "8080:8080"
     healthcheck:
       test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8080/geoserver/ows"
       start_period: 60s
@@ -137,13 +143,18 @@ services:
     healthcheck:
       test: "pg_isready -d postgres -U postgres"
     # uncomment to enable remote connections to postgres
-    #ports:
-    #  - "5432:5432"
+    ports:
+      - "5432:5432"
 
   # Vanilla RabbitMQ service. This is needed by celery
   rabbitmq:
     image: rabbitmq:3.7-alpine
     container_name: rabbitmq4${COMPOSE_PROJECT_NAME}
+    ports:
+      - "4369:4369"
+      - "5671-5672:5671-5672"
+      - "15672:15672"
+      - "25672:25672"
     volumes:
       - rabbitmq:/var/lib/rabbitmq
     restart: on-failure

@@ -40,9 +40,6 @@ RUN pip install sherlock
 # add bower and grunt command
 COPY . /usr/src/geonode/
 WORKDIR /usr/src/geonode
-COPY ./geonode-mapstore-client /usr/src/geonode-mapstore-client
-COPY ./geonode-importer /usr/src/geonode-importer
-
 
 COPY monitoring-cron /etc/cron.d/monitoring-cron
 RUN chmod 0644 /etc/cron.d/monitoring-cron
